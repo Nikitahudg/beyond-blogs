@@ -1,23 +1,20 @@
-<div class="container">
-    <h2 class="text-center mt-5 mb-4">Write a Blog</h2>
-    <form (submit)="saveBlog()">
+<section class="write-blog-section mt-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Write a New Blog</h2>
+    <form (submit)="submitBlog()">
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
-        <input type="text" class="form-control" id="title" [(ngModel)]="blogTitle" name="blogTitle" required>
+        <input type="text" class="form-control" id="title" [(ngModel)]="newBlog.title" required>
       </div>
       <div class="mb-3">
         <label for="author" class="form-label">Author</label>
-        <input type="text" class="form-control" id="author" [(ngModel)]="authorName" name="authorName" required>
+        <input type="text" class="form-control" id="author" [(ngModel)]="newBlog.author" required>
       </div>
       <div class="mb-3">
         <label for="content" class="form-label">Content</label>
-        <textarea class="form-control" id="content" [(ngModel)]="blogContent" name="blogContent" rows="6" required></textarea>
+        <textarea class="form-control" id="content" rows="5" [(ngModel)]="newBlog.content" required></textarea>
       </div>
-      <div class="mb-3">
-        <label for="tags" class="form-label">Tags (comma-separated)</label>
-        <input type="text" class="form-control" id="tags" [(ngModel)]="blogTags" name="blogTags">
-      </div>
-      <button type="submit" class="btn btn-primary">Save Blog</button>
+      <button type="submit" class="btn btn-primary">Post Blog</button>
     </form>
   </div>
-  
+</section>

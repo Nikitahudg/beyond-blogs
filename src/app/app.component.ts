@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BlogService } from './blog.service'; 
+import { BlogService } from './blog.service';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +7,12 @@ import { BlogService } from './blog.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(public blogService: BlogService) {}
+  title(title: any) {}
+  //  featuredPosts: any[] = [];
+
+  // constructor(public blogService: BlogService) {}
+
+  // ngOnInit(): void {
+  //   this.featuredPosts = this.blogService.getFeaturedPosts();
+  // }
 }

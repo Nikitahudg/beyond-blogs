@@ -1,4 +1,30 @@
 <div class="container">
-    <h2>Blog</h2>
-  </div>
-  
+  <section class="carousel-section mt-5" *ngIf="featuredPosts.length > 0">
+    <div id="featuredCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div *ngFor="let post of featuredPosts; let i = index" class="carousel-item" [ngClass]="{'active': i === 0}">
+          <div class="row justify-content-center display-flex">
+            <div class="col-md-6">
+              <a [routerLink]="['/blog', post.title]">
+                <div class="featured-post">
+                  <img src="https://images.rawpixel.com/image_400/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcHgxMDk3MTc2LWltYWdlLWt3dndhdjM4LmpwZw.jpg" alt="{{ post.title }}" class="img-fluid">
+                  <div class="featured-content">
+                    <h5 class="carousel-title">{{ post.title }}</h5>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
+        <i class="fas fa-chevron-left"></i>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
+        <i class="fas fa-chevron-right"></i>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </section>
+</div>

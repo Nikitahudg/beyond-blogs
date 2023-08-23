@@ -11,6 +11,7 @@ import { BlogListComponent } from './blog-list/blog-list.component';
 import { BlogService } from './blog.service';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
+import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { FooterComponent } from './footer/footer.component';
     HomeComponent,
     WriteBlogComponent,
     BlogListComponent,
-    FooterComponent
+    FooterComponent,
+    BlogDetailComponent
   ],
   imports: [
     BrowserModule,
