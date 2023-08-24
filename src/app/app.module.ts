@@ -12,6 +12,7 @@ import { BlogService } from './blog.service';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
+import { UserLoginComponent } from './user-login/user-login.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { BlogDetailComponent } from './blog-detail/blog-detail.component';
     WriteBlogComponent,
     BlogListComponent,
     FooterComponent,
-    BlogDetailComponent
+    BlogDetailComponent,
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,

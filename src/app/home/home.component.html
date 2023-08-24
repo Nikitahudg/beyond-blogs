@@ -1,30 +1,40 @@
-<div class="container">
-  <section class="carousel-section mt-5" *ngIf="featuredPosts.length > 0">
-    <div id="featuredCarousel" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div *ngFor="let post of featuredPosts; let i = index" class="carousel-item" [ngClass]="{'active': i === 0}">
-          <div class="row justify-content-center display-flex">
-            <div class="col-md-6">
-              <a [routerLink]="['/blog', post.title]">
-                <div class="featured-post">
-                  <img src="https://images.rawpixel.com/image_400/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcHgxMDk3MTc2LWltYWdlLWt3dndhdjM4LmpwZw.jpg" alt="{{ post.title }}" class="img-fluid">
-                  <div class="featured-content">
-                    <h5 class="carousel-title">{{ post.title }}</h5>
-                  </div>
-                </div>
-              </a>
+<div class="container mt-5">
+  <section class="featured-posts">
+    <h2 class="mb-4">Featured Posts</h2>
+    <div class="card-container">
+      <div class="card featured-card" *ngFor="let post of featuredPosts">
+        <img [src]="post.imageUrl" alt="{{ post.title }}" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title">{{ post.title }}</h5>
+          <p class="card-text">{{ post.content | slice:0:150 }}{{ post.content.length > 150 ? '...' : '' }}</p>
+          <div class="card-bottom">
+            <div class="d-flex justify-content-between align-items-center">
+              <small class="text-muted"><i class="fas fa-user"></i> {{ post.author }}</small>
+            </div>
+            <a [routerLink]="['/blog', post.title]" class="btn btn-primary">Read More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><div class="container mt-5">
+    <section class="latest-posts">
+      <h2 class="section-title mb-4">Latest Posts</h2>
+      <div class="card-container">
+        <div class="card latest-card" *ngFor="let post of latestBlogs">
+          <img [src]="post.imageUrl" alt="{{ post.title }}" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.content | slice:0:150 }}{{ post.content.length > 150 ? '...' : '' }}</p>
+            <div class="card-bottom">
+              <div class="post-meta">
+                <i class="far fa-calendar-alt"></i>
+                <p class="post-date">{{ post.date }}</p>
+              </div>
+              <a [routerLink]="['/blog', post.title]" class="btn btn-outline-dark btn-sm">Read More</a>
             </div>
           </div>
         </div>
       </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
-        <i class="fas fa-chevron-left"></i>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
-        <i class="fas fa-chevron-right"></i>
-        <span class="visually-hidden">Next</span>
-      </button>
-    </div>
-  </section>
-</div>
+    </section>
+  </div>
+  

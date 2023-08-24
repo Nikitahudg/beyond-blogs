@@ -16,7 +16,8 @@ export class WriteBlogComponent {
     author: '',
     content: '',
     tags: [],
-    date: new Date().toISOString()
+    date: new Date().toISOString(),
+    imageUrl:''
   };
 
   tagInput: string = '';
@@ -36,7 +37,8 @@ export class WriteBlogComponent {
       author: '',
       content: '',
       tags: [],
-      date: new Date().toISOString()
+      date: new Date().toISOString(),
+      imageUrl :''
     };
     this.tagInput = '';
     

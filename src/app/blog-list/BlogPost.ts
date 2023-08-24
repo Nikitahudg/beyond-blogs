@@ -1,6 +1,8 @@
-interface BlogPost {
-    userId: number;
-    title: string;
-    body: string;
-  }
-  
+export interface BlogPost {
+  title: string;
+  content: string;
+  author: string;
+  date: string;
+  tags: string[];
+  imageUrl: string;
+}

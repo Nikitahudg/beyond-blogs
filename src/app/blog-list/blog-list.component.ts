@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BlogService, BlogPost } from '../blog.service';
 
 @Component({
@@ -7,13 +8,21 @@ import { BlogService, BlogPost } from '../blog.service';
   styleUrls: ['./blog-list.component.css']
 })
 export class BlogListComponent implements OnInit {
-  blogPosts: BlogPost[] = [];
+  filteredPosts: BlogPost[] = [];
 
-  constructor(private blogService: BlogService) {}
+  constructor(
+    private blogService: BlogService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
-    this.blogService.fetchBlogPosts().subscribe(posts => {
-      this.blogPosts = posts;
+    this.route.queryParams.subscribe(params => {
+      const tags = params['tags'];
+      if (tags) {
+        this.filteredPosts = this.blogService.getBlogPostByTags(tags);
+      } else {
+        this.filteredPosts = this.blogService.getLatestBlogPosts(); 
+      }
     });
   }
 }

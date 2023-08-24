@@ -8,11 +8,14 @@ import { BlogService, BlogPost } from '../blog.service';
 })
 export class HomeComponent implements OnInit {
   featuredPosts: BlogPost[] = [];
+  latestBlogs: BlogPost[] = [];
 
   constructor(private blogService: BlogService) {}
 
   ngOnInit(): void {
-    this.featuredPosts = this.blogService.getFeaturedPosts();
-      console.log(this.featuredPosts);
-    }
+    this.blogService.fetchBlogPosts().subscribe(posts => {
+      this.featuredPosts = posts.slice(0, 3); 
+      this.latestBlogs = posts;
+    });
+  }
 }

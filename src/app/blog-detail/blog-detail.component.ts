@@ -8,7 +8,9 @@ import { BlogService, BlogPost } from '../blog.service';
   styleUrls: ['./blog-detail.component.css']
 })
 export class BlogDetailComponent implements OnInit {
-  post?: BlogPost ;
+  post?: BlogPost;
+  filteredPosts: BlogPost[] = [];
+ // comment: string = '';  
 
   constructor(
     private route: ActivatedRoute,
@@ -17,8 +19,20 @@ export class BlogDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const title = this.route.snapshot.paramMap.get('title');
-    if (title) { 
+    if (title) {
       this.post = this.blogService.getBlogPostByTitle(title);
     }
   }
+
+  filterByTag(tag: string): void {
+    this.filteredPosts = this.blogService.getBlogPostByTags([tag]);
+  }
+  // submitComment(): void {
+  //   if (this.post && this.comment) {
+  //     this.blogService.addCommentToPost(this.post, this.comment);
+  //     this.comment = ''; 
+  //   }
+  // }
+  
+  
 }

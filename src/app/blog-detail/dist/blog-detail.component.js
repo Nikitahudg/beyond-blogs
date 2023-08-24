@@ -9,15 +9,20 @@ exports.__esModule = true;
 exports.BlogDetailComponent = void 0;
 var core_1 = require("@angular/core");
 var BlogDetailComponent = /** @class */ (function () {
+    // comment: string = '';  
     function BlogDetailComponent(route, blogService) {
         this.route = route;
         this.blogService = blogService;
+        this.filteredPosts = [];
     }
     BlogDetailComponent.prototype.ngOnInit = function () {
         var title = this.route.snapshot.paramMap.get('title');
         if (title) {
             this.post = this.blogService.getBlogPostByTitle(title);
         }
+    };
+    BlogDetailComponent.prototype.filterByTag = function (tag) {
+        this.filteredPosts = this.blogService.getBlogPostByTags([tag]);
     };
     BlogDetailComponent = __decorate([
         core_1.Component({

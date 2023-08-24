@@ -6,6 +6,10 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class BlogService {
+  addCommentToPost(post: BlogPost, comment: string) {
+    throw new Error('Method not implemented.');
+  }
+ 
   private blogPosts: BlogPost[] = [];
   private featuredPosts: BlogPost[] = [];
   private blogPostAddedSubject = new Subject<BlogPost>();
@@ -16,12 +20,13 @@ export class BlogService {
       this.featuredPosts = this.blogPosts.slice(0, 2);
     });
   }
-
+  
+  
   fetchBlogPosts(): Observable<BlogPost[]> {
     return this.http.get<BlogPost[]>('./assets/blog-posts.json');
   }
 
-  getBlogPosts(): BlogPost[] {
+  getLatestBlogPosts(): BlogPost[] {
     return this.blogPosts;
   }
 
@@ -38,6 +43,10 @@ export class BlogService {
     return this.blogPosts.find(post => post.title === title);
   }
 
+  getBlogPostByTags(tags: string[]): BlogPost[] {
+    return this.blogPosts.filter(post => post.tags.some(tag => tags.includes(tag)));
+  }
+
   get blogPostAdded$(): Observable<BlogPost> {
     return this.blogPostAddedSubject.asObservable();
   }
@@ -49,4 +58,5 @@ export interface BlogPost {
   content: string;
   tags: string[];
   date: string;
+  imageUrl: string;
 }
