@@ -1,0 +1,9 @@
+.gradient-form {
+    background: linear-gradient(to right, #ffffff, #d6c4be);
+  }
+  .btn-primary {
+    background-color: black;
+    border-color: black;
+    width: 100%;
+  }
+  

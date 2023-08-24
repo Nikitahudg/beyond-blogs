@@ -1,36 +1,8 @@
 body {
-    background-color: #fcf2ec; 
+   
     margin: 0;
     padding: 0;
     font-family: "sorts-mill-goudy", serif;
     font-weight: 500;
     font-style: normal;
 }
-.blog-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #000000; 
-    margin-bottom: 10px;
-  }
-
-.transparent-bg {
-    color: #000000; 
-  }
-  
-  .carousel-title {
-    font-size: 24px;
-    text-transform: capitalize; 
-  }
-  
-  .carousel-content {
-    font-size: 18px;
-  }
-  
-  .carousel-footer {
-    margin-top: 20px;
-  }
-  
-  .carousel-tags button {
-    margin-right: 5px;
-  }
-  

@@ -13,6 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './footer/footer.component';
 import { BlogDetailComponent } from './blog-detail/blog-detail.component';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { ProfileComponent } from './profile/profile.component';
+import { EditComponent } from './edit/edit.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { UserLoginComponent } from './user-login/user-login.component';
     BlogListComponent,
     FooterComponent,
     BlogDetailComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    ProfileComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,

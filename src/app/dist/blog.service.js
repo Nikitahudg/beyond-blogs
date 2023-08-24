@@ -8,48 +8,42 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.BlogService = void 0;
 var core_1 = require("@angular/core");
-var rxjs_1 = require("rxjs");
 var BlogService = /** @class */ (function () {
-    function BlogService(http) {
-        var _this = this;
-        this.http = http;
+    function BlogService() {
+        this.localStorageKey = 'blogPosts';
         this.blogPosts = [];
-        this.featuredPosts = [];
-        this.blogPostAddedSubject = new rxjs_1.Subject();
-        this.fetchBlogPosts().subscribe(function (posts) {
-            _this.blogPosts = posts;
-            _this.featuredPosts = _this.blogPosts.slice(0, 2);
-        });
+        this.latestPost = null;
+        this.loadBlogPosts();
     }
-    BlogService.prototype.addCommentToPost = function (post, comment) {
-        throw new Error('Method not implemented.');
+    BlogService.prototype.loadBlogPosts = function () {
+        var storedData = localStorage.getItem(this.localStorageKey);
+        if (storedData) {
+            this.blogPosts = JSON.parse(storedData);
+        }
+    };
+    BlogService.prototype.saveBlogPosts = function () {
+        localStorage.setItem(this.localStorageKey, JSON.stringify(this.blogPosts));
+    };
+    BlogService.prototype.saveLatestPostToStorage = function () {
+        localStorage.setItem('latestPost', JSON.stringify(this.latestPost));
     };
     BlogService.prototype.fetchBlogPosts = function () {
-        return this.http.get('./assets/blog-posts.json');
+        // Implement fetching blog posts if needed
     };
-    BlogService.prototype.getLatestBlogPosts = function () {
+    BlogService.prototype.getBlogPosts = function () {
         return this.blogPosts;
     };
-    BlogService.prototype.getFeaturedPosts = function () {
-        return this.featuredPosts;
+    BlogService.prototype.addBlogPost = function (blogPost) {
+        this.blogPosts.push(blogPost);
+        this.saveBlogPosts();
     };
-    BlogService.prototype.addBlog = function (blog) {
-        this.blogPosts.push(blog);
-        this.blogPostAddedSubject.next(blog);
+    BlogService.prototype.updateLatestPost = function (newPost) {
+        this.latestPost = newPost;
+        this.saveLatestPostToStorage();
     };
-    BlogService.prototype.getBlogPostByTitle = function (title) {
-        return this.blogPosts.find(function (post) { return post.title === title; });
+    BlogService.prototype.getLatestPost = function () {
+        return this.latestPost;
     };
-    BlogService.prototype.getBlogPostByTags = function (tags) {
-        return this.blogPosts.filter(function (post) { return post.tags.some(function (tag) { return tags.includes(tag); }); });
-    };
-    Object.defineProperty(BlogService.prototype, "blogPostAdded$", {
-        get: function () {
-            return this.blogPostAddedSubject.asObservable();
-        },
-        enumerable: false,
-        configurable: true
-    });
     BlogService = __decorate([
         core_1.Injectable({
             providedIn: 'root'
@@ -58,3 +52,78 @@ var BlogService = /** @class */ (function () {
     return BlogService;
 }());
 exports.BlogService = BlogService;
+// export class BlogService {
+//   private localStorageKey = 'blogPosts';
+//   private blogPosts: BlogPost[] = [];
+//   private latestPost: BlogPost | null = null;
+//   constructor() {
+//     this.loadBlogPosts();
+//     this.updateLatestPostFromStorage();
+//   }
+//   private updateLatestPostFromStorage(): void {
+//     const storedLatestPost = localStorage.getItem('latestPost');
+//     if (storedLatestPost) {
+//       this.latestPost = JSON.parse(storedLatestPost);
+//     }
+//   }
+//   private saveLatestPostToStorage(): void {
+//     localStorage.setItem('latestPost', JSON.stringify(this.latestPost));
+//   }
+//   fetchBlogPosts(): void {
+//     // Your logic to fetch blog posts from an API or other source
+//   }
+//   getBlogPosts(): BlogPost[] {
+//     return this.blogPosts;
+//   }
+//   getFeaturedPosts(): BlogPost[] {
+//     return [];
+//   }
+//   getLatestPost(): BlogPost | null {
+//     return this.latestPost;
+//   }
+//   addBlogPost(blogPost: BlogPost): void {
+//     this.blogPosts.push(blogPost);
+//     this.saveBlogPosts();
+//   }
+//   updateLatestPost(newPost: BlogPost): void {
+//     this.latestPost = newPost;
+//     this.saveLatestPostToStorage();
+//   }
+//   private loadBlogPosts(): void {
+//     const storedData = localStorage.getItem(this.localStorageKey);
+//     if (storedData) {
+//       this.blogPosts = JSON.parse(storedData);
+//     }
+//   }
+//   private saveBlogPosts(): void {
+//     localStorage.setItem(this.localStorageKey, JSON.stringify(this.blogPosts));
+//   }
+// }
+// export class BlogService {
+//   getLatestPost(): BlogPost | null {
+//     throw new Error('Method not implemented.');
+//   }
+//   private localStorageKey = 'blogPosts';
+//   private blogPosts: any[] = [];
+//   constructor() {
+//     this.loadBlogPosts();
+//   }
+//   private loadBlogPosts(): void {
+//     const storedData = localStorage.getItem(this.localStorageKey);
+//     if (storedData) {
+//       this.blogPosts = JSON.parse(storedData);
+//     }
+//   }
+//   private saveBlogPosts(): void {
+//     localStorage.setItem(this.localStorageKey, JSON.stringify(this.blogPosts));
+//   }
+//   fetchBlogPosts(): void {
+//   }
+//   getBlogPosts(): any[] {
+//     return this.blogPosts;
+//   }
+//   addBlogPost(blogPost: any): void {
+//     this.blogPosts.push(blogPost);
+//     this.saveBlogPosts();
+//   }
+// }

@@ -9,22 +9,11 @@ exports.__esModule = true;
 exports.BlogListComponent = void 0;
 var core_1 = require("@angular/core");
 var BlogListComponent = /** @class */ (function () {
-    function BlogListComponent(blogService, route) {
+    //blogPosts: BlogPost[] = [];
+    function BlogListComponent(blogService) {
         this.blogService = blogService;
-        this.route = route;
-        this.filteredPosts = [];
     }
     BlogListComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        this.route.queryParams.subscribe(function (params) {
-            var tags = params['tags'];
-            if (tags) {
-                _this.filteredPosts = _this.blogService.getBlogPostByTags(tags);
-            }
-            else {
-                _this.filteredPosts = _this.blogService.getLatestBlogPosts();
-            }
-        });
     };
     BlogListComponent = __decorate([
         core_1.Component({

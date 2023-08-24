@@ -1,81 +1,36 @@
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
-.featured-posts, .latest-blogs {
-  margin-bottom: 50px;
-}
-
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-}
-
-.card {
-  flex: 1;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-.card img {
-  width: 100%;
-  height: 50%;
-  padding-top: 5%;
-  padding-bottom: 5%;
+.carousel-image {
+  height: 400px;
   object-fit: cover;
-  padding-left: 5%;
-  padding-right: 5%;
 }
 
-.card-body {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.small-icon {
+  font-size: 40px;
 }
 
-.card-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-  padding-bottom: 5px;
+.carousel-control-prev,
+.carousel-control-next {
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.card-text {
-  font-size: 1rem;
-  color: #555;
-  margin-bottom: 20px;
-  flex-grow: 1;
+.carousel-control-prev {
+  left: 0;
+  margin-left: 15px;
 }
 
-.card-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 15px;
+.carousel-control-next {
+  right: 0;
+  margin-right: 15px; 
 }
 
-.btn-primary {
-  background-color: #000000;
-  border-color: #feffff;
-  padding: 8px 16px;
-  font-size: 14px;
+.featured-title {
+  text-transform: uppercase;
+  font-size:larger;
+  font-weight: bold; 
 }
 
-
-
-@media screen and (max-width: 768px) {
-  .card {
-    flex: 1 0 calc(50% - 15px);
-  }
+.read-more-button {
+  background-color: black;
+  color: white;
+  font-weight: bold; 
 }
