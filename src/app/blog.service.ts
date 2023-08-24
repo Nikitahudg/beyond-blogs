@@ -1,52 +1,37 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BlogService {
-  private blogPosts: BlogPost[] = [];
-  private featuredPosts: BlogPost[] = [];
-  private blogPostAddedSubject = new Subject<BlogPost>();
+  private localStorageKey = 'blogPosts';
+  private blogPosts: any[] = [];
 
-  constructor(private http: HttpClient) {
-    this.fetchBlogPosts().subscribe(posts => {
-      this.blogPosts = posts;
-      this.featuredPosts = this.blogPosts.slice(0, 2);
-    });
+  constructor() {
+    this.loadBlogPosts();
   }
 
-  fetchBlogPosts(): Observable<BlogPost[]> {
-    return this.http.get<BlogPost[]>('./assets/blog-posts.json');
+  private loadBlogPosts(): void {
+    const storedData = localStorage.getItem(this.localStorageKey);
+    if (storedData) {
+      this.blogPosts = JSON.parse(storedData);
+    }
   }
 
-  getBlogPosts(): BlogPost[] {
+  private saveBlogPosts(): void {
+    localStorage.setItem(this.localStorageKey, JSON.stringify(this.blogPosts));
+  }
+
+  fetchBlogPosts(): void {
+    // No need for fetching, as we'll use local storage
+  }
+
+  getBlogPosts(): any[] {
     return this.blogPosts;
   }
 
-  getFeaturedPosts(): BlogPost[] {
-    return this.featuredPosts;
+  addBlogPost(blogPost: any): void {
+    this.blogPosts.push(blogPost);
+    this.saveBlogPosts();
   }
-
-  addBlog(blog: BlogPost): void {
-    this.blogPosts.push(blog);
-    this.blogPostAddedSubject.next(blog);
-  }
-
-  getBlogPostByTitle(title: string): BlogPost | undefined {
-    return this.blogPosts.find(post => post.title === title);
-  }
-
-  get blogPostAdded$(): Observable<BlogPost> {
-    return this.blogPostAddedSubject.asObservable();
-  }
-}
-
-export interface BlogPost {
-  title: string;
-  author: string;
-  content: string;
-  tags: string[];
-  date: string;
 }
