@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BlogService, BlogPost } from '../blog.service';
+import { BlogService } from '../blog.service';
+
 
 @Component({
   selector: 'app-blog-list',
@@ -8,6 +10,7 @@ import { BlogService, BlogPost } from '../blog.service';
   styleUrls: ['./blog-list.component.css']
 })
 export class BlogListComponent implements OnInit {
+
   filteredPosts: BlogPost[] = [];
 
   constructor(

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogService, BlogPost } from '../blog.service';
+import { BlogService } from '../blog.service';
 
 @Component({
   selector: 'app-home',
@@ -18,4 +18,5 @@ export class HomeComponent implements OnInit {
       this.latestBlogs = posts;
     });
   }
+
 }

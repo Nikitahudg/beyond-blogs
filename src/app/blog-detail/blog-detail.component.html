@@ -1,3 +1,4 @@
+
 <div class="container mt-5">
   <div class="card">
     <div class="card-body">
@@ -35,10 +36,15 @@
           <i class="fas fa-arrow-left"></i> Back to Blog List
         </button>
       </div>
-      <!-- <div class="comment-form mt-4">
-        <textarea [(ngModel)]="comment" placeholder="Leave a comment"></textarea>
-        <button class="btn btn-primary" (click)="submitComment()">Post Comment</button>
-      </div> -->
-    </div>
+     
   </div>
 </div>
+
+<div class="blog-list">
+  <div *ngFor="let post of filteredBlogPosts">
+    <h2>{{ post.title }}</h2>
+    <img [src]="post.imageUrl">
+    <p><strong>Author:</strong> {{ post.author }}</p>
+    <p>{{ post.content }}</p>
+    <div><strong>Tags:</strong> {{ post.tags.join(', ') }}</div>
+  </div>

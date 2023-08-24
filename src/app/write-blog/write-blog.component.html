@@ -1,20 +1,27 @@
 <section class="write-blog-section mt-5">
   <div class="container">
     <h2 class="text-center mb-4">Write a New Blog</h2>
-    <form (submit)="submitBlog()">
-      <div class="mb-3">
-        <label for="title" class="form-label">Title</label>
-        <input type="text" class="form-control" id="title" [(ngModel)]="newBlog.title" required>
-      </div>
-      <div class="mb-3">
-        <label for="author" class="form-label">Author</label>
-        <input type="text" class="form-control" id="author" [(ngModel)]="newBlog.author" required>
-      </div>
-      <div class="mb-3">
-        <label for="content" class="form-label">Content</label>
-        <textarea class="form-control" id="content" rows="5" [(ngModel)]="newBlog.content" required></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary">Post Blog</button>
-    </form>
+
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input [(ngModel)]="blogTitle" class="form-control mb-2" placeholder="Title">
+    </div>
+    <div class="mb-3">
+      <label for="author" class="form-label">Author</label>
+      <input [(ngModel)]="authorName" class="form-control mb-2" placeholder="Author">
+    </div>
+    <div class="mb-3">
+      <label for="content" class="form-label">Content</label>
+      <textarea [(ngModel)]="blogContent" class="form-control mb-2" placeholder="Content"></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="tags" class="form-label">Tags</label>
+      <input [(ngModel)]="blogTags" class="form-control mb-2" placeholder="Tags">
+    </div>
+    <div class="mb-3">
+      <label for="imageUrl" class="form-label">Image URL</label>
+      <input [(ngModel)]="blogImageUrl" class="form-control mb-2" placeholder="Image URL">
+    </div>
+    <button type="submit" (click)="saveBlog()" class="btn btn-primary">Post Blog</button>
   </div>
 </section>
