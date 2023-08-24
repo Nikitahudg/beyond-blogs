@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BlogService } from '../blog.service';
-import { Router } from '@angular/router';
-
-// Import the BlogPost interface from the blog.service file
-import { BlogPost } from '../blog.service';
 
 @Component({
   selector: 'app-write-blog',
@@ -11,39 +8,45 @@ import { BlogPost } from '../blog.service';
   styleUrls: ['./write-blog.component.css']
 })
 export class WriteBlogComponent {
-  newBlog: BlogPost = {
-    title: '',
-    author: '',
-    content: '',
-    tags: [],
-    date: new Date().toISOString()
-  };
+  public loggedIn: boolean = false;
+  blogTitle = '';
+  authorName = '';
+  blogContent = '';
+  blogTags = '';
+  blogImageUrl = ''; // New property for image URL
 
-  tagInput: string = '';
-  constructor(private blogService: BlogService, private router: Router) {
-    this.blogService.blogPostAdded$.subscribe((blogPost: BlogPost) => {
-      alert('Blog successfully posted!');
-      this.router.navigate(['/']); //
+  constructor(
+    private route: ActivatedRoute,
+    private blogService: BlogService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      this.loggedIn = params['loggedIn'] === 'loggedIn';
     });
   }
 
-
-  submitBlog() {
-    this.blogService.addBlog(this.newBlog);
-
-    this.newBlog = {
-      title: '',
-      author: '',
-      content: '',
-      tags: [],
-      date: new Date().toISOString()
-    };
-    this.tagInput = '';
-    
-    this.router.navigate(['/']); 
+  saveBlog(): void {
+    const confirmResult = confirm('Do you want to post the blog?');
+    if (confirmResult) {
+      this.postBlog();
+    } else {
+      // User chose not to post, you can implement any additional logic here
+    }
   }
 
-  updateTags() {
-    this.newBlog.tags = this.tagInput.split(',').map(tag => tag.trim());
+  postBlog(): void {
+    const newBlog = {
+      title: this.blogTitle,
+      author: this.authorName,
+      content: this.blogContent,
+      tags: this.blogTags.split(',').map(tag => tag.trim()),
+      imageUrl: this.blogImageUrl, // Include the image URL
+      date: new Date().toLocaleDateString()
+    };
+
+    this.blogService.addBlogPost(newBlog);
+    this.router.navigate(['/']); // Navigate back to home after posting
   }
 }
