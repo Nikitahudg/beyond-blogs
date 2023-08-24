@@ -1,5 +1,8 @@
+
+import { Component } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-user-login',
@@ -48,13 +51,12 @@ export class UserLoginComponent implements OnInit {
   onSignup() {
     this.signupUsers.push(this.signupObj);
     localStorage.setItem('signUpUsers', JSON.stringify(this.signupUsers));
-    // You can add additional logic here after signup
+   
     console.log('Updated Signup Users:', this.signupUsers);
   }
 
   toggleForm(): void {
     this.showSignupForm = !this.showSignupForm;
-    // Reset form fields
     this.signupObj.userName = '';
     this.signupObj.email = '';
     this.signupObj.password = '';

@@ -12,10 +12,14 @@ var HomeComponent = /** @class */ (function () {
     function HomeComponent(blogService) {
         this.blogService = blogService;
         this.featuredPosts = [];
+        this.latestBlogs = [];
     }
     HomeComponent.prototype.ngOnInit = function () {
-        this.featuredPosts = this.blogService.getFeaturedPosts();
-        console.log(this.featuredPosts);
+        var _this = this;
+        this.blogService.fetchBlogPosts().subscribe(function (posts) {
+            _this.featuredPosts = posts.slice(0, 3);
+            _this.latestBlogs = posts;
+        });
     };
     HomeComponent = __decorate([
         core_1.Component({

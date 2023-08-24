@@ -21,10 +21,13 @@ var BlogService = /** @class */ (function () {
             _this.featuredPosts = _this.blogPosts.slice(0, 2);
         });
     }
+    BlogService.prototype.addCommentToPost = function (post, comment) {
+        throw new Error('Method not implemented.');
+    };
     BlogService.prototype.fetchBlogPosts = function () {
         return this.http.get('./assets/blog-posts.json');
     };
-    BlogService.prototype.getBlogPosts = function () {
+    BlogService.prototype.getLatestBlogPosts = function () {
         return this.blogPosts;
     };
     BlogService.prototype.getFeaturedPosts = function () {
@@ -36,6 +39,9 @@ var BlogService = /** @class */ (function () {
     };
     BlogService.prototype.getBlogPostByTitle = function (title) {
         return this.blogPosts.find(function (post) { return post.title === title; });
+    };
+    BlogService.prototype.getBlogPostByTags = function (tags) {
+        return this.blogPosts.filter(function (post) { return post.tags.some(function (tag) { return tags.includes(tag); }); });
     };
     Object.defineProperty(BlogService.prototype, "blogPostAdded$", {
         get: function () {

@@ -7,12 +7,16 @@ import { BlogService } from '../blog.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  //featuredPosts: BlogPost[] = [];
+  featuredPosts: BlogPost[] = [];
+  latestBlogs: BlogPost[] = [];
 
   constructor(private blogService: BlogService) {}
 
   ngOnInit(): void {
-    //this.featuredPosts = this.blogService.getFeaturedPosts();
-     // console.log(this.featuredPosts);
-    }
+    this.blogService.fetchBlogPosts().subscribe(posts => {
+      this.featuredPosts = posts.slice(0, 3); 
+      this.latestBlogs = posts;
+    });
+  }
+
 }

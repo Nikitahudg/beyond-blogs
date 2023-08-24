@@ -18,7 +18,8 @@ var WriteBlogComponent = /** @class */ (function () {
             author: '',
             content: '',
             tags: [],
-            date: new Date().toISOString()
+            date: new Date().toISOString(),
+            imageUrl: ''
         };
         this.tagInput = '';
         this.blogService.blogPostAdded$.subscribe(function (blogPost) {
@@ -33,7 +34,8 @@ var WriteBlogComponent = /** @class */ (function () {
             author: '',
             content: '',
             tags: [],
-            date: new Date().toISOString()
+            date: new Date().toISOString(),
+            imageUrl: ''
         };
         this.tagInput = '';
         this.router.navigate(['/']);

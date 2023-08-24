@@ -8,7 +8,8 @@ import { BlogService } from '../blog.service';
   styleUrls: ['./blog-detail.component.css']
 })
 export class BlogDetailComponent implements OnInit {
-  
+  post?: BlogPost;
+  filteredPosts: BlogPost[] = [];
   blogPosts: any[] = [];
   selectedTags: string[] = [];
   searchQuery: string = '';
@@ -17,8 +18,11 @@ export class BlogDetailComponent implements OnInit {
   constructor(private blogService: BlogService) {}
 
   ngOnInit(): void {
-    this.blogPosts = this.blogService.getBlogPosts();
-    this.applyFilter(); // Apply initial filter
+    const title = this.route.snapshot.paramMap.get('title');
+    if (title) {
+      this.post = this.blogService.getBlogPostByTitle(title);
+      this.blogPosts = this.blogService.getBlogPosts();
+      this.applyFilter(); 
   }
 
   handleSearch(): void {
@@ -60,10 +64,12 @@ export class BlogDetailComponent implements OnInit {
  
   private matchesSelectedTags(post: any): boolean {
     if (this.selectedTags.length === 0) {
-      return true; // Show all posts if no tags selected
+      return true;
     }
     return post.tags.some((tag: string) => this.selectedTags.includes(tag));
   }
-  
 
+  filterByTag(tag: string): void {
+    this.filteredPosts = this.blogService.getBlogPostByTags([tag]);
+  }
 }

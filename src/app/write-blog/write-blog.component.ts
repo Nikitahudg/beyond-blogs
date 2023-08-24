@@ -8,19 +8,27 @@ import { BlogService } from '../blog.service';
   styleUrls: ['./write-blog.component.css']
 })
 export class WriteBlogComponent {
+  newBlog: BlogPost = {
+    title: '',
+    author: '',
+    content: '',
+    tags: [],
+    date: new Date().toISOString(),
+    imageUrl:''
+  };
+
   public loggedIn: boolean = false;
   blogTitle = '';
   authorName = '';
   blogContent = '';
   blogTags = '';
-  blogImageUrl = ''; // New property for image URL
+  blogImageUrl = ''; 
 
   constructor(
     private route: ActivatedRoute,
     private blogService: BlogService,
     private router: Router
   ) {}
-
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.loggedIn = params['loggedIn'] === 'loggedIn';
@@ -32,9 +40,20 @@ export class WriteBlogComponent {
     if (confirmResult) {
       this.postBlog();
     } else {
-      // User chose not to post, you can implement any additional logic here
     }
   }
+
+
+  submitBlog() {
+    this.blogService.addBlog(this.newBlog);
+
+    this.newBlog = {
+      title: '',
+      author: '',
+      content: '',
+      tags: [],
+      date: new Date().toISOString(),
+      imageUrl :''
 
   postBlog(): void {
     const newBlog = {
@@ -42,11 +61,12 @@ export class WriteBlogComponent {
       author: this.authorName,
       content: this.blogContent,
       tags: this.blogTags.split(',').map(tag => tag.trim()),
-      imageUrl: this.blogImageUrl, // Include the image URL
+      imageUrl: this.blogImageUrl,
       date: new Date().toLocaleDateString()
+
     };
 
     this.blogService.addBlogPost(newBlog);
-    this.router.navigate(['/']); // Navigate back to home after posting
+    this.router.navigate(['/']); 
   }
 }

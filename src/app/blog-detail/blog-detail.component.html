@@ -1,3 +1,45 @@
+
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <div class="post-header text-center mb-4">
+        <h2 class="post-title">{{ post?.title }}</h2>
+        <div class="post-meta">
+          <i class="fas fa-calendar-alt"></i>
+          <p class="post-date">{{ post?.date }}</p>
+          <i class="fas fa-user ml-2"></i>
+          <p class="post-author">{{ post?.author }}</p>
+        </div>
+      </div>
+      <div class="image-container text-center">
+        <img [src]="post?.imageUrl" alt="{{ post?.title }}" class="img-fluid">
+      </div>
+      <div class="post-content text-justify mt-4 mb-4">
+        <p class="card-text">{{ post?.content }}</p>
+      </div>
+      <div class="post-footer text-center mb-4">
+        <div class="post-tags mt-3">
+          <strong><i class="fas fa-tags"></i> Tags:</strong>
+          <div class="tag-buttons">
+            <button
+              *ngFor="let tag of post?.tags"
+              class="tag-button"
+              (click)="filterByTag(tag)"
+            >
+              {{ tag }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="back-button mt-5 text-center">
+        <button class="btn btn-secondary" routerLink="/blog">
+          <i class="fas fa-arrow-left"></i> Back to Blog List
+        </button>
+      </div>
+     
+  </div>
+</div>
+
 <div class="blog-list">
   <div *ngFor="let post of filteredBlogPosts">
     <h2>{{ post.title }}</h2>
