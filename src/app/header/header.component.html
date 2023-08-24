@@ -17,12 +17,16 @@
                     <a routerLink="/write-blog" class="btn btn-primary">Write Blog</a>
                 </li>
             </ul>
-            <form class="d-flex ml-md-4">
+            <!-- <form class="d-flex ml-md-4">
                 <input class="form-control me-2 bg-transparent border-light text-white" type="search"
                     placeholder="Search" aria-label="Search" style="width: 300px;">
                 <button class="btn btn-outline-light" type="submit">Search</button>
-            </form>
+            </form> -->
             
+            <div class="search-container">
+                <input type="text" [(ngModel)]="searchQuery" placeholder="Search by tags...">
+                <button class="search-button" (click)="searchByTags()">Search</button>
+              </div>
         </div>
     </div>
 </nav>
